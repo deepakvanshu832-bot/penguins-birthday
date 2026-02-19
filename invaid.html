@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEVEL 19 UNLOCKED | PENGLOW</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Quicksand:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-pink: #ff6ac1;
+            --neon-purple: #b466ff;
+            --neon-blue: #5ce1ff;
+            --bg-dark: #1a1a2e;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-dark);
+            font-family: 'Press Start 2P', cursive;
+            color: white;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Background Effects */
+        .grid-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(180, 102, 255, 0.1) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(180, 102, 255, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+        }
+
+        /* Screen Management */
+        .screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .active { display: flex; }
+
+        @keyframes popIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Typography & UI */
+        h1 { font-size: 1.5rem; line-height: 1.6; text-shadow: 3px 3px var(--neon-pink); }
+        .stat-line { font-family: 'Quicksand', sans-serif; font-size: 1.2rem; margin: 15px 0; color: var(--neon-blue); }
+        .highlight { color: var(--neon-pink); }
+
+        button {
+            background: var(--neon-purple);
+            border: 4px solid white;
+            padding: 15px 30px;
+            color: white;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-top: 30px;
+            box-shadow: 5px 5px 0px var(--neon-pink);
+            transition: 0.1s;
+        }
+
+        button:active { transform: translate(3px, 3px); box-shadow: 0px 0px 0px; }
+
+        /* Pixel Confetti */
+        .pixel-confetti {
+            position: absolute;
+            width: 10px; height: 10px;
+            pointer-events: none;
+        }
+
+        /* Page Specifics */
+        .stats-box { border: 4px solid var(--neon-blue); padding: 20px; background: rgba(0,0,0,0.5); width: 100%; }
+        .loot-item { margin: 10px 0; font-size: 0.7rem; color: #ffeb3b; }
+        .floating-icon { font-size: 3rem; margin-bottom: 20px; animation: bounce 2s infinite; }
+
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+
+    </style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+
+<div class="screen active" id="page1">
+    <div class="floating-icon">🎮</div>
+    <h1>PLAYER PENGLOW HAS ENTERED <span class="highlight">LEVEL 19</span></h1>
+    <button onclick="nextPage(2)">PRESS START</button>
+</div>
+
+<div class="screen" id="page2">
+    <h1>LEVEL 19 STATS</h1>
+    <div class="stats-box">
+        <div class="stat-line">AGE: <span class="highlight">19</span></div>
+        <div class="stat-line">CHARM: <span class="highlight">MAX</span></div>
+        <div class="stat-line">WHOLESOME ENERGY: <span class="highlight">OVERPOWERED</span></div>
+        <div class="stat-line">LAG TOLERANCE: <span style="color: #ff4757;">QUESTIONABLE</span></div>
+    </div>
+    <button onclick="nextPage(3)">CONTINUE MISSION</button>
+</div>
+
+<div class="screen" id="page3">
+    <h1>QUEST LOG:</h1>
+    <p class="stat-line">Still carrying the squad.</p>
+    <p class="stat-line">Still stealing hearts.</p>
+    <p class="stat-line">Still pretending she's not the main character.</p>
+    <button onclick="nextPage(4); spawnConfetti();">VIEW LOOT</button>
+</div>
+
+<div class="screen" id="page4">
+    <div class="floating-icon">🎁</div>
+    <h1>BIRTHDAY REWARDS UNLOCKED!</h1>
+    <div class="loot-item">+100 HAPPINESS</div>
+    <div class="loot-item">+500 GLOW</div>
+    <div class="loot-item">LEGENDARY CAKE SKIN 🎂</div>
+    <button onclick="nextPage(5); finalBlast();">CLAIM REWARDS</button>
+</div>
+
+<div class="screen" id="page5">
+    <h1 style="font-size: 2rem;">💖✨🎉</h1>
+    <h1>ACHIEVEMENT UNLOCKED:</h1>
+    <p class="highlight">SWEETEST STREAMER ALIVE</p>
+    <h2 style="font-size: 1rem; margin-top: 20px;">HAPPY 19TH, PENGLOW!</h2>
+    <button onclick="location.reload()">PLAY AGAIN?</button>
+</div>
+
+<script>
+    function nextPage(pageNumber) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById('page' + pageNumber).classList.add('active');
+    }
+
+    function spawnConfetti() {
+        const colors = ['#ff6ac1', '#b466ff', '#5ce1ff', '#ffffff'];
+        for(let i=0; i<50; i++) {
+            const div = document.createElement('div');
+            div.className = 'pixel-confetti';
+            div.style.left = Math.random() * 100 + 'vw';
+            div.style.top = '-10px';
+            div.style.background = colors[Math.floor(Math.random() * colors.length)];
+            document.body.appendChild(div);
+
+            const animation = div.animate([
+                { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+                { transform: `translateY(100vh) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+            ], {
+                duration: Math.random() * 2000 + 1000,
+                easing: 'linear'
+            });
+
+            animation.onfinish = () => div.remove();
+        }
+    }
+
+    function finalBlast() {
+        setInterval(spawnConfetti, 300);
+    }
+</script>
+
+</body>
+</html>
+let konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+    let inputSequence = [];
+
+    // Navigation logic
+    function nextPage(pageNumber) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById('page' + pageNumber).classList.add('active');
+    }
+
+    // Confetti logic
+    function spawnConfetti() {
+        const colors = ['#ff6ac1', '#b466ff', '#5ce1ff', '#ffffff', '#ffeb3b'];
+        for(let i=0; i<30; i++) {
+            const div = document.createElement('div');
+            div.className = 'pixel-confetti';
+            div.style.left = Math.random() * 100 + 'vw';
+            div.style.top = '-10px';
+            div.style.zIndex = '100';
+            div.style.background = colors[Math.floor(Math.random() * colors.length)];
+            document.body.appendChild(div);
+
+            const animation = div.animate([
+                { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+                { transform: `translateY(100vh) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+            ], {
+                duration: Math.random() * 2000 + 1000,
+                easing: 'linear'
+            });
+            animation.onfinish = () => div.remove();
+        }
+    }
+
+    function finalBlast() {
+        setInterval(spawnConfetti, 300);
+    }
+
+    // SECRET CHEAT CODE LOGIC
+    window.addEventListener('keydown', (e) => {
+        inputSequence.push(e.key);
+        inputSequence = inputSequence.slice(-konamiCode.length);
+
+        if (JSON.stringify(inputSequence) === JSON.stringify(konamiCode)) {
+            activateGodMode();
+        }
+    });
+
+    function activateGodMode() {
+        // Visual feedback
+        document.body.style.backgroundColor = "#ffd700"; // Gold flash
+        setTimeout(() => { document.body.style.backgroundColor = "var(--bg-dark)"; }, 500);
+        
+        // Custom Alert/Message
+        alert("✨ CHEAT CODE ACTIVATED: GOD MODE PENGLOW ✨\n\nUnlocked: Infinite Luck, 0% Lag, and the title of 'The Ultimate Main Character'.\n\nGo conquer Level 19!");
+        
+        // Visual celebration
+        finalBlast();
+    }
